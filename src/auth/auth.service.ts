@@ -39,6 +39,10 @@ export class AuthService {
         phone: createAuthDto.phone,
         photoProfile: 'https://cdn-icons-png.flaticon.com/128/3177/3177440.png',
       },
+      include: {
+        journey: true,
+        bookmarks: true,
+      },
     });
   }
 
@@ -123,6 +127,12 @@ export class AuthService {
         email: true,
         fullName: true,
       },
+    });
+  }
+
+  async deleteUser(id: string) {
+    return await this.prisma.user.delete({
+      where: { id },
     });
   }
 }

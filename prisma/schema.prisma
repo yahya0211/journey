@@ -31,7 +31,7 @@ model Journey {
   published DateTime  @default(now())
   authorId  String
   image     String?
-  author    User      @relation(fields: [authorId], references: [id])
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
   bookmarks Bookmark?
 }
 
@@ -42,8 +42,8 @@ model Bookmark {
   userId    String
   journeyId String @unique
 
-  user    User    @relation(fields: [userId], references: [id])
-  journey Journey @relation(fields: [journeyId], references: [id])
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  journey Journey @relation(fields: [journeyId], references: [id], onDelete: Cascade)
 
   @@unique([userId, journeyId])
 }
